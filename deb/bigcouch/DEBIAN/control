@@ -1,0 +1,11 @@
+Package: bigcouch
+Version: 0.3-1
+Architecture: i386
+Maintainer: Cloudant <support@cloudant.com>
+Depends: libicu42, libicu-dev, libmozjs-1.9.2, libmozjs-1.9.2-dev, runit
+Breaks: couchdb
+Replaces: couchdb
+Section: misc
+Priority: optional
+Homepage: http://cloudant.com/
+Description: BigCouch is a dynamo-style distributed database based on Apache CouchDB.

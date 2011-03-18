@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+case $1 in
+    configure)
+        if ! getent passwd bigcouch > /dev/null; then
+            adduser --system --quiet --home /home/bigcouch \
+                --shell /bin/bash --group bigcouch
+        fi
+        if test "`id -u bigcouch`" -eq 0; then
+            echo "The bigcouch administrative user must not be root." >&2
+            false
+        fi
+        if test "`id -g bigcouch`" -eq 0; then
+            echo "The bigcouch administrative group must not be root." >&2
+            false
+        fi
+        chown -R bigcouch:bigcouch /opt/bigcouch
+        mkdir -p /home/bigcouch
+        chown -R bigcouch:bigcouch /home/bigcouch
+        chown -R root:root /etc/sv/bigcouch
+        ln -sf /etc/sv/bigcouch /etc/service/
+        ;;
+esac
