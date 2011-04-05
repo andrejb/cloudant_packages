@@ -1,0 +1,18 @@
+Source: bigcouch
+Section: misc
+Priority: extra
+Maintainer: Cloudant <support@cloudant.com>
+Build-Depends: debhelper (>= 7), quilt, autotools-dev, erlang-dev, erlang-reltool, libmozjs-1.9.2-dev, libicu-dev
+Standards-Version: 3.8.3
+Homepage: http://cloudant.com/
+Vcs-Git: git://github.com/cloudant/bigcouch.git
+Vcs-Browser: http://github.com/cloudant/bigcouch
+
+Package: bigcouch
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, runit, erlang
+Provides: couchdb
+Conflicts: couchdb
+Replaces: couchdb
+Description: BigCouch is a dynamo-style distributed database based on Apache CouchDB.
+

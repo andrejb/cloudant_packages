@@ -1,0 +1,19 @@
+#!/bin/sh -e                                                                                                                           
+
+VERSION=%VERSION%
+
+case $1 in
+    purge)
+        if test -d "/opt/bigcouch"; then
+            rm -r -f "/opt/bigcouch" 
+        fi
+        if getent passwd bigcouch > /dev/null && which deluser > /dev/null; then
+            deluser bigcouch
+	fi
+        if getent group bigcouch > /dev/null && which delgroup > /dev/null; then
+            delgroup bigcouch
+	fi
+        ;;
+esac
+
+#DEBHELPER#
