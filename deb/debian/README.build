@@ -7,4 +7,4 @@ To build this package you will need to create ../bigcouch-$VERSION.tar.gz as fol
 
 Now build the package;
 
-4) dpkg-buildpackage -us -uc
+4) debuild -us -uc
