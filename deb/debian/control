@@ -10,7 +10,7 @@ Vcs-Browser: http://github.com/cloudant/bigcouch
 
 Package: bigcouch
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, runit, erlang
+Depends: ${shlibs:Depends}, ${misc:Depends}, runit, erlang | erlang-nox
 Provides: couchdb
 Conflicts: couchdb
 Replaces: couchdb
