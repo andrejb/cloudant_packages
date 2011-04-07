@@ -9,19 +9,12 @@ The bigcouch source needs to exist in rpmbuild/SOURCES/bigcouch.tar.gz before ru
 $ rpmbuild -ba bigcouch.spec --define "_revision 0.3" --define "_release 1"
 
 <h2>Ubuntu</h2>
-$ ./configure
-$ make
-$ make install
-$ cd ../bigcouch_debian/
-$ cp -R /opt/bigcouch opt/
-$ /opt/bigcouch/bin/bigcouch # to verify it runs
-$ cd ..
-$ dpkg --build bigcouch_debian
-$ mv bigcouch_debian.deb bigcouch_0.3-1_amd64.deb
 
-Then upload these files to github.
-
-The ubuntu build is likely suboptimal, long term it should probably be built using a chroot, LVM and sbuilder/pbuilder. All of these packages can likely be built via Hudson/Jenkins. One thing to note it is generally considered a bad practice to build these as root, don't do that.
+1. git clone git://github.com/cloudant/bigcouch.git
+2. git archive --format=tar bigcouch-$VERSION | gzip > bigcouch_$VERSION.orig.tar.gz
+3. move that file to this directory.
+4. untar that file into the deb/ subdirectory.
+5. debuild -us -uc
 
 More resources:
 
