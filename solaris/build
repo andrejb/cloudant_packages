@@ -20,7 +20,7 @@ cat > $DIR/Prototype <<EOF
 i pkginfo
 EOF
 
-cat $DIR/files | pkgproto | sed 's/root root/bin bin/' >> $DIR/Prototype
+cat $DIR/files | pkgproto >> $DIR/Prototype
 
 # Create pkginfo
 PKG='CLOUbigcouch'
