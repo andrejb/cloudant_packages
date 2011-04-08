@@ -47,4 +47,6 @@ pkgmk -o -r / -d $DIR -f $DIR/Prototype
 
 # Zip it up
 
-tar -C $DIR -cf - $PKG | gzip -9 -c > $DIR/$PKG.$VERSION.$ARCH.pkg.tar.gz
+FILE="$DIR/$PKG.$VERSION.$ARCH.pkg.tar.gz"
+tar -C $DIR -cf - $PKG | gzip -9 -c > $FILE
+echo "Package built at $FILE"
