@@ -18,7 +18,7 @@ cat > $DIR/Prototype <<EOF
 i pkginfo
 EOF
 
-cat $DIR/files | pkgproto | sed 's/root root/bigcouch bigcouch/' >> $DIR/Prototype
+cat $DIR/files | pkgproto | sed 's/root root/bin bin/' >> $DIR/Prototype
 
 # Create pkginfo
 PKG='CLOUbigcouch'
