@@ -11,6 +11,8 @@ mkdir -p $DIR
 # Build list of files to install
 
 find /opt/bigcouch | sed '/opt\/bigcouch\/var/d' | sed '/~$/d' > $DIR/files
+echo '/opt/bigcouch/var/lib/' >> $DIR/files
+echo '/opt/bigcouch/var/log/' >> $DIR/files
 
 # Create package prototype
 
