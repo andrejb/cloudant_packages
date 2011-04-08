@@ -1,0 +1,48 @@
+#!/bin/sh
+
+if [ ! -d '/opt/bigcouch' ]; then
+    echo "BigCouch is not installed on this machine, aborting."
+    exit 1
+fi
+
+DIR='/tmp/bigcouch'
+mkdir -p $DIR
+
+# Build list of files to install
+
+find /opt/bigcouch | sed '/opt\/bigcouch\/var/d' | sed '/~$/d' > $DIR/files
+
+# Create package prototype
+
+cat > $DIR/Prototype <<EOF
+i pkginfo
+EOF
+
+cat $DIR/files | pkgproto | sed 's/root root/bigcouch bigcouch/' >> $DIR/Prototype
+
+# Create pkginfo
+PKG='CLOUbigcouch'
+ARCH='i386'
+VERSION='0.4.a' # TODO determine from install.
+
+cat > $DIR/pkginfo <<EOF
+PKG="$PKG"
+NAME="Cloudant BigCouch $VERSION"
+VERSION="$VERSION"
+ARCH="$ARCH"
+CLASSES="none"
+CATEGORY="application"
+VENDOR=""
+EMAIL="support@cloudant.com"
+ISTATES="S s 1 2 3"
+RSTATES="S s 1 2 3"
+BASEDIR="/"
+EOF
+
+# Build the package
+
+pkgmk -o -r / -d $DIR -f $DIR/Prototype
+
+# Zip it up
+
+tar -C $DIR -cf - $PKG | gzip -9 -c > $DIR/$PKG.$VERSION.$ARCH.pkg.tar.gz
