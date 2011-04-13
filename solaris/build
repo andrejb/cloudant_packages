@@ -41,6 +41,10 @@ RSTATES="S s 1 2 3"
 BASEDIR="/"
 EOF
 
+# add to postinstall
+# svccfg import /var/svc/manifest/network/bigcouch.xml
+# svcadm enable network/bigcouch
+
 # Build the package
 
 pkgmk -o -r / -d $DIR -f $DIR/Prototype

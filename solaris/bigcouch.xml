@@ -185,37 +185,16 @@
            type='service'
            version='1'>
 
-    <create_default_instance enabled='false' />
+    <create_default_instance enabled='true' />
 
     <single_instance/>
 
-    <dependency name='fs-local'
-                grouping='require_all'
-                restart_on='none'
-                type='service'>
-      <service_fmri
-         value='svc:/system/filesystem/local' />
+    <dependency name="network" grouping="require_all" restart_on="refresh" type="service">
+      <service_fmri value="svc:/milestone/network:default"/>
     </dependency>
 
-    <dependency name='fs-autofs'
-                grouping='optional_all'
-                restart_on='none'
-                type='service'>
-      <service_fmri value='svc:/system/filesystem/autofs' />
-    </dependency>
-
-    <dependency name='net-loopback'
-                grouping='require_all'
-                restart_on='none'
-                type='service'>
-      <service_fmri value='svc:/network/loopback' />
-    </dependency>
-
-    <dependency name='net-physical'
-                grouping='require_all'
-                restart_on='none'
-                type='service'>
-      <service_fmri value='svc:/network/physical' />
+    <dependency name="filesystem" grouping="require_all" restart_on="refresh" type="service">
+      <service_fmri value="svc:/system/filesystem/local"/>
     </dependency>
 
     <exec_method
@@ -230,7 +209,21 @@
        exec=':kill'
        timeout_seconds='60' />
 
+    <property_group name="startd" type="framework">
+      <propval name="duration" type="astring" value="child"/>
+      <propval name="ignore_error" type="astring" value="core,signal"/>
+    </property_group>
+
+    <property_group name="application" type="application">
+    </property_group>
+
     <stability value='Unstable' />
+
+    <template>
+      <common_name>
+        <loctext xml:lang="C">Cloudant BigCouch</loctext>
+      </common_name>
+    </template>
 
   </service>
 </service_bundle>
