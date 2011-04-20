@@ -2,7 +2,7 @@ Source: bigcouch
 Section: misc
 Priority: extra
 Maintainer: Cloudant Support <support@cloudant.com>
-Build-Depends: debhelper (>= 7.0.50~), quilt, autotools-dev, erlang-dev, erlang-reltool, xulrunner-1.9.2-dev, libicu-dev
+Build-Depends: debhelper (>= 7.0.50~), quilt, autotools-dev, erlang-dev, erlang-reltool, xulrunner-1.9.2-dev, libicu-dev, git
 Standards-Version: 3.8.4
 Homepage: http://cloudant.com/
 Vcs-Git: git://github.com/cloudant/bigcouch.git
