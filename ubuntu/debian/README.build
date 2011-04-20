@@ -1,0 +1,10 @@
+To build this package you will need to create ../bigcouch-$VERSION.tar.gz as follows
+
+1) git clone git://github.com/cloudant/bigcouch.git
+2) git archive --format=tar bigcouch-$VERSION | gzip > bigcouch_$VERSION.orig.tar.gz
+3) move that file to the directory above this one.
+4) untar that file into *this* directory.
+
+Now build the package;
+
+4) debuild -us -uc
