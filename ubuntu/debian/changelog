@@ -1,3 +1,9 @@
+bigcouch (0.3.1-ppa4) lucid; urgency=low
+
+  * Correct package name for git.
+
+ -- Robert Newson <robert.newson@cloudant.com>  Wed, 20 Apr 2011 13:35:30 +0100
+
 bigcouch (0.3.1-ppa3) lucid; urgency=low
 
   * Add git as build dependency.
