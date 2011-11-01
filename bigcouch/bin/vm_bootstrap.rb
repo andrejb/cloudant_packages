@@ -15,15 +15,22 @@ apt-get update \
 apt-get --force-yes -y upgrade
 apt-get --force-yes -y dist-upgrade
 apt-get --force-yes -y install \
-ssh \
-vim \
-git-core \
-ruby ruby-dev rubygems \
-libcurl4-openssl-dev \
-libssl-dev libssl0.9.8 \
-build-essential libtool autoconf \
-libncurses5-dev m4 \
-openjdk-6-jdk
+    autoconf \
+    build-essential \
+    git-core \
+    libcurl4-openssl-dev \
+    libncurses5-dev \
+    libssl0.9.8 \
+    libssl-dev \
+    libtool \
+    m4 \
+    openjdk-6-jdk \
+    quilt \
+    ruby \
+    rubygems \
+    ruby-dev \
+    ssh \
+    vim
 EOH
 
 libmozjs = <<-EOH
@@ -48,6 +55,15 @@ cd #{erlang_version}
 ./configure #{erlang_options}
 make
 make install
+if ! test -f /usr/bin/erl; then \
+    ln -s /usr/local/bin/erl /usr/bin/erl; \
+fi
+if ! test -f /usr/bin/erlc; then \
+    ln -s /usr/local/bin/erlc /usr/bin/erlc; \
+fi
+if ! test -f /usr/bin/escript; then \
+    ln -s /usr/local/bin/escript /usr/bin/escript; \
+fi
 cd ~/
 EOH
 
