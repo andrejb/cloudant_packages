@@ -38,7 +38,7 @@ icu = <<-EOH
 apt-get install libicu42 libicu-dev
 EOH
 
-erlang_version = "otp_src_R13B04"
+erlang_version = "otp_src_R14B01"
 erlang_options = "--enable-kernel-poll --enable-hipe --enable-threads --enable-smp-support #{erlang_build}"
 
 erlang = <<-EOH
