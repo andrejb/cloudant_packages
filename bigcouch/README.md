@@ -13,11 +13,8 @@ $ rpmbuild -ba bigcouch.spec --define "_revision 0.3" --define "_release 1"
 Ubuntu
 ------
 
-1. git clone git://github.com/cloudant/bigcouch.git
-2. git archive --format=tar bigcouch-$VERSION | gzip > bigcouch_$VERSION.orig.tar.gz
-3. move that file to this directory.
-4. untar that file into the deb/ subdirectory.
-5. debuild -us -uc
+    $ sudo ./bin/vm_bootstrap.rb
+    $ ./bin/build_deb.rb
 
 More resources
 --------------
