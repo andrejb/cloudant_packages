@@ -1,3 +1,9 @@
+bigcouch (0.4.0-1) unstable; urgency=low
+
+  * Updated build for 0.4.0
+
+ -- Paul J. Davis  <paul.joseph.davis@gmail.com> Tue, 01 Nov 2011 16:17:18 +0600
+
 bigcouch (0.3.1-1) unstable; urgency=low
 
   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
