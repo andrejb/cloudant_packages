@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-VERSION=%VERSION%
-
 case $1 in
     purge)
         if test -d "/opt/bigcouch"; then

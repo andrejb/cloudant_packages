@@ -19,6 +19,10 @@ case $1 in
         chown -R bigcouch:bigcouch /home/bigcouch
         chown -R bigcouch:bigcouch /opt/bigcouch
         chown -R root:root /etc/sv/bigcouch
-        ln -sf /etc/sv/bigcouch /etc/service/
+        if test -d /etc/service; then
+            ln -sf /etc/sv/bigcouch /etc/service/
+        fi
         ;;
 esac
+
+#DEBHELPER#
