@@ -10,8 +10,7 @@ Vcs-Browser: http://github.com/cloudant/bigcouch
 
 Package: bigcouch
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Suggests: runit
+Depends: ${shlibs:Depends}, ${misc:Depends}, runit
 Conflicts: couchdb
 Description: BigCouch is a dynamo-style implementation of Apache CouchDB
 
