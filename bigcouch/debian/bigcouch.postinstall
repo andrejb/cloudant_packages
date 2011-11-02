@@ -17,6 +17,7 @@ case $1 in
         chown -R bigcouch:bigcouch /opt/bigcouch
         mkdir -p /home/bigcouch
         chown -R bigcouch:bigcouch /home/bigcouch
+        chown -R bigcouch:bigcouch /opt/bigcouch
         chown -R root:root /etc/sv/bigcouch
         ln -sf /etc/sv/bigcouch /etc/service/
         ;;
