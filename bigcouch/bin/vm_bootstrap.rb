@@ -17,6 +17,8 @@ apt-get --force-yes -y dist-upgrade
 apt-get --force-yes -y install \
     autoconf \
     build-essential \
+    debhelper \
+    devscripts \
     git-core \
     libcurl4-openssl-dev \
     libncurses5-dev \
