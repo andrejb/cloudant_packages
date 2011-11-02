@@ -10,9 +10,8 @@ Vcs-Browser: http://github.com/cloudant/bigcouch
 
 Package: bigcouch
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, runit, erlang | erlang-nox
-Provides: couchdb
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: runit
 Conflicts: couchdb
-Replaces: couchdb
-Description: BigCouch is a dynamo-style distributed database based on Apache CouchDB.
+Description: BigCouch is a dynamo-style implementation of Apache CouchDB
 
