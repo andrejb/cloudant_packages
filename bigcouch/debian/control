@@ -2,7 +2,7 @@ Source: bigcouch
 Section: misc
 Priority: extra
 Maintainer: Cloudant Support <support@cloudant.com>
-Build-Depends: debhelper (>= 7.0.50~), quilt, autotools-dev, libmozjs-1.9.2-dev, libicu-dev
+Build-Depends: debhelper (>= 7.0.50~), quilt, autotools-dev, libmozjs185-dev, libicu-dev
 Standards-Version: 3.8.4
 Homepage: http://cloudant.com/
 Vcs-Git: git://github.com/cloudant/bigcouch.git
@@ -10,7 +10,7 @@ Vcs-Browser: http://github.com/cloudant/bigcouch
 
 Package: bigcouch
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, runit
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmozjs185, runit
 Conflicts: couchdb
 Description: BigCouch is a dynamo-style implementation of Apache CouchDB
 

@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
 arch = `uname -m`
+js_version = "1.0.0"
 
 if arch == "x86_64"
   erlang_build = "--enable-m64-build"
@@ -36,11 +37,10 @@ apt-get --force-yes -y install \
 EOH
 
 libmozjs = <<-EOH
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 74EE6429
-echo "deb http://ppa.launchpad.net/commonjs/ppa/ubuntu karmic main" >> /etc/apt/sources.list
-apt-get update
-apt-get --force-yes -y install libmozjs-1.9.2 libmozjs-1.9.2-dev
-ln -svf /usr/lib/libmozjs-1.9.2.so /usr/lib/libmozjs.so
+wget http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185_#{js_version}-1_#{arch}.deb
+wget http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185-dev_#{js_version}-1_#{arch}.deb
+dpkg -i libmozjs185_#{js_version}-1_#{arch}.deb
+dpkg -i libmozjs185-dev_#{js_version}-1_#{arch}.deb
 EOH
 
 icu = <<-EOH
