@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+case $1 in
+    remove)
+        if test -d "/etc/service/bigcouch"; then
+            sv down bigcouch
+            rm -r -f /etc/service/bigcouch
+        fi
+        ;;
+esac
+
+#DEBHELPER#

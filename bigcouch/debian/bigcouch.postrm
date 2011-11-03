@@ -2,6 +2,9 @@
 
 case $1 in
     purge)
+        if test -d "/etc/sv/bigcouch"; then
+            rm -r -f "/etc/sv/bigcouch"
+        fi
         if test -d "/opt/bigcouch"; then
             rm -r -f "/opt/bigcouch"
         fi
