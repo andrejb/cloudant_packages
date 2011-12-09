@@ -44,7 +44,7 @@ dpkg -i libmozjs185-dev_#{js_version}-1_#{arch}.deb
 EOH
 
 icu = <<-EOH
-apt-get install libicu42 libicu-dev
+apt-get install libicu-dev
 EOH
 
 erlang_version = "otp_src_R14B01"
