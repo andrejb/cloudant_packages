@@ -37,8 +37,8 @@ apt-get --force-yes -y install \
 EOH
 
 libmozjs = <<-EOH
-wget http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185_#{js_version}-1_#{arch}.deb
-wget http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185-dev_#{js_version}-1_#{arch}.deb
+wget -c http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185_#{js_version}-1_#{arch}.deb
+wget -c http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185-dev_#{js_version}-1_#{arch}.deb
 dpkg -i libmozjs185_#{js_version}-1_#{arch}.deb
 dpkg -i libmozjs185-dev_#{js_version}-1_#{arch}.deb
 EOH
@@ -51,7 +51,7 @@ erlang_version = "otp_src_R14B01"
 erlang_options = "--enable-kernel-poll --enable-hipe --enable-threads --enable-smp-support #{erlang_build}"
 
 erlang = <<-EOH
-wget http://erlang.org/download/#{erlang_version}.tar.gz
+wget -c http://erlang.org/download/#{erlang_version}.tar.gz
 tar zxvf #{erlang_version}.tar.gz
 cd #{erlang_version}
 ./configure #{erlang_options}

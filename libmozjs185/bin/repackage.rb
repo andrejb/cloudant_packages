@@ -10,7 +10,7 @@ rm -rf deb/#{dst_name}*
 mkdir -p tarballs
 
 cd tarballs/
-wget -qN #{mozilla_ftp}/#{src_name}.tar.gz
+wget -qcN #{mozilla_ftp}/#{src_name}.tar.gz
 cd ../
 
 tar -xzf tarballs/#{src_name}.tar.gz

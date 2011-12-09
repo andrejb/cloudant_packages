@@ -14,7 +14,7 @@ appfile = "apps/couch/src/couch.app.src"
 build = <<-EOH
 rm -rf build/
 mkdir -p build/
-wget -q #{url} -O build/bigcouch_#{vsn}.orig.tar.gz
+wget -cq #{url} -O build/bigcouch_#{vsn}.orig.tar.gz
 tar -C build -zxf build/bigcouch_#{vsn}.orig.tar.gz
 mv build/cloudant-bigcouch-* build/bigcouch-#{vsn}
 cp -r debian build/bigcouch-#{vsn}/debian
