@@ -47,7 +47,7 @@ apt-get -y install libicu-dev
 EOH
 
 erlang_version = "otp_src_R14B01"
-erlang_options = "--enable-kernel-poll --enable-hipe --enable-threads --enable-smp-support #{erlang_build}"
+erlang_options = "--enable-kernel-poll --enable-hipe --enable-threads --enable-smp-support CFLAGS=\"-D_FORTIFY_SOURCE=0\" #{erlang_build}"
 
 erlang = <<-EOH
 echo -n "Fetching erlang tarball: "
