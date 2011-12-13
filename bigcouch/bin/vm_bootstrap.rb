@@ -56,7 +56,17 @@ echo "done"
 tar zxf #{erlang_version}.tar.gz
 cd #{erlang_version}
 ./configure #{erlang_options}
+make
 make install
+if ! test -f /usr/bin/erl; then \
+    ln -s /usr/local/bin/erl /usr/bin/erl; \
+fi
+if ! test -f /usr/bin/erlc; then \
+    ln -s /usr/local/bin/erlc /usr/bin/erlc; \
+fi
+if ! test -f /usr/bin/escript; then \
+    ln -s /usr/local/bin/escript /usr/bin/escript; \
+fi
 cd ~/
 EOH
 
