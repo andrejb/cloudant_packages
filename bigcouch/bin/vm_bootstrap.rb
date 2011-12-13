@@ -30,7 +30,6 @@ apt-get --force-yes -y install \
     openjdk-6-jdk \
     quilt \
     ruby \
-    rubygems \
     ruby-dev \
     ssh \
     vim
