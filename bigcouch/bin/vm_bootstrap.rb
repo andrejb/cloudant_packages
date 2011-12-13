@@ -51,8 +51,10 @@ erlang_version = "otp_src_R14B01"
 erlang_options = "--enable-kernel-poll --enable-hipe --enable-threads --enable-smp-support #{erlang_build}"
 
 erlang = <<-EOH
-wget -c http://erlang.org/download/#{erlang_version}.tar.gz
-tar zxvf #{erlang_version}.tar.gz
+echo -n "Fetching erlang tarball: "
+wget --quiet -c http://erlang.org/download/#{erlang_version}.tar.gz
+echo "done"
+tar zxf #{erlang_version}.tar.gz
 cd #{erlang_version}
 ./configure #{erlang_options}
 make
