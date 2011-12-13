@@ -23,7 +23,6 @@ apt-get --force-yes -y install \
     git-core \
     libcurl4-openssl-dev \
     libncurses5-dev \
-    libssl0.9.8 \
     libssl-dev \
     libtool \
     m4 \
