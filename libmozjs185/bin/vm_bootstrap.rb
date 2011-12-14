@@ -3,8 +3,6 @@
 
 deps = <<-EOH
 apt-get update
-apt-get --force-yes -y upgrade
-apt-get --force-yes -y dist-upgrade
 apt-get --force-yes -y install \
     ssh \
     vim \
