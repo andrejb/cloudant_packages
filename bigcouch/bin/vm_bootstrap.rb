@@ -37,7 +37,6 @@ EOH
 libmozjs = <<-EOH
 wget -c http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185_#{js_version}-1_#{arch}.deb
 wget -c http://packages.cloudant.com/libmozjs185/#{js_version}/#{arch}/libmozjs185-dev_#{js_version}-1_#{arch}.deb
-apt-get -y install libnspr4-0d
 dpkg -i libmozjs185_#{js_version}-1_#{arch}.deb
 dpkg -i libmozjs185-dev_#{js_version}-1_#{arch}.deb
 EOH
