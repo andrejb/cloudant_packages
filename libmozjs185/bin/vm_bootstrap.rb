@@ -12,7 +12,6 @@ apt-get --force-yes -y install \
     devscripts \
     autotools-dev \
     zip \
-    libnspr4 \
     libnspr4-dev
 EOH
 
