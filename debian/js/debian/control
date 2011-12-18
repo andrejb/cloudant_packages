@@ -1,0 +1,28 @@
+Source: js
+Priority: extra
+Maintainer: Robert Newson <robert.newson@cloudant.com>
+Build-Depends: debhelper (>= 7.0.50~), libnspr4-dev (>= 4.7.1), zip, python
+Standards-Version: 3.9.1
+Section: libs
+Homepage: http://www.mozilla.org/js
+
+Package: libmozjs185-1.0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Spidermonkey javascript engine
+ SpiderMonkey is the code-name for the Mozilla's C implementation of
+ JavaScript. It is intended to be embedded in other applications
+ that provide host environments for JavaScript.
+
+Package: libmozjs185-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmozjs185-1.0 (= ${binary:Version}), libnspr4-dev
+Description: Spidermonkey javascript library - development headers
+ SpiderMonkey is the code-name for the Mozilla's C implementation of
+ JavaScript. It is intended to be embedded in other applications
+ that provide host environments for JavaScript.
+ .
+ This package contains the header files and static library which is
+ needed for developing Spidermonkey embedders.

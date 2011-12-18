@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --sourcedirectory=$(CURDIR)/js/src
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--with-system-nspr \
+		--disable-tests \
+		--disable-strip
+
+override_dh_auto_test:

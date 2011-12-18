@@ -1,0 +1,7 @@
+*.debhelper
+*.log
+*.substvars
+files
+libmozjs185-1.0
+libmozjs185-dev
+tmp

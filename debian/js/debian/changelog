@@ -1,0 +1,5 @@
+js (1.8.5-1.0.0~cloudant1) unstable; urgency=low
+
+  * Initial release
+
+ -- Robert Newson <robert.newson@cloudant.com>  Thu, 15 Dec 2011 13:41:22 +0000
