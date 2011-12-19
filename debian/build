@@ -7,6 +7,7 @@ ARCHS="i386 amd64"
 
 # Install build dependencies
 sudo apt-get -y install ubuntu-dev-tools dpkg-dev git dh-make > /dev/null
+mkdir -p ~/pbuilder
 
 # Build SpiderMonkey source package if missing
 echo -n "Building SpiderMonkey source package: "
