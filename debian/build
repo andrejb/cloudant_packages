@@ -6,7 +6,7 @@ SUITES="squeeze lucid maverick natty oneiric"
 ARCHS="i386 amd64"
 
 # Install build dependencies
-sudo apt-get -y install ubuntu-dev-tools dpkg-dev git > /dev/null
+sudo apt-get -y install ubuntu-dev-tools dpkg-dev git dh-make > /dev/null
 
 # Build SpiderMonkey source package if missing
 echo -n "Building SpiderMonkey source package: "
