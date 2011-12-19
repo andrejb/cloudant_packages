@@ -7,7 +7,10 @@ ARCHS="i386 amd64"
 
 # Install build dependencies
 sudo apt-get -y install ubuntu-dev-tools dpkg-dev git dh-make > /dev/null
-mkdir -p ~/pbuilder
+
+# Configure web cache
+sudo apt-get -y install polipo > /dev/null
+export http_proxy="http://localhost:8123"
 
 # Build SpiderMonkey source package if missing
 echo -n "Building SpiderMonkey source package: "
@@ -68,6 +71,9 @@ do
 	else
 	    echo "skip"
 	fi
+
+	# Build erlang from source if missing
+	$SETARCH pbuilder-dist $SUITE $ARCH execute --save-after-exec build_erlang
 
 	# Build binary SpiderMonkey package if missing
 	echo -n "Building SpiderMonkey binary for $SUITE ($ARCH): "
