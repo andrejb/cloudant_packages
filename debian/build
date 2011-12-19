@@ -1,4 +1,6 @@
 #!/bin/bash -e
+# Run this script on an EC2 instance running Ubuntu 11.10;
+# knife ec2 server create -f m1.large -I ami-21f53948 --region us-east-1 -x ubuntu
 
 SUITES="squeeze lucid maverick natty oneiric"
 ARCHS="i386 amd64"
