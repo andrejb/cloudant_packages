@@ -1,13 +1,5 @@
 #!/bin/sh -e
 
-ARCH=`uname -m`
-if [ "$ARCH" == "x86_64" ];
-then
-  erlang_build="--enable-m64-build"
-else
-  erlang_build="--enable-m32-build"
-fi
-
 HOME=/tmp/
 export http_proxy="http://localhost:8123"
 erlang_version="otp_src_R14B01"
@@ -24,7 +16,6 @@ cd $erlang_version
     --enable-hipe \
     --enable-threads \
     --enable-smp-support \
-    $erlang_build \
     CFLAGS="-D_FORTIFY_SOURCE=0"
 make
 make install
