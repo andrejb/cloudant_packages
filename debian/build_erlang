@@ -21,9 +21,9 @@ make
 make install
 cd ..
 
-ln -s /usr/local/bin/erl /usr/bin/erl
-ln -s /usr/local/bin/erlc /usr/bin/erlc
-ln -s /usr/local/bin/escript /usr/bin/escript
+ln -sf /usr/local/bin/erl /usr/bin/erl
+ln -sf /usr/local/bin/erlc /usr/bin/erlc
+ln -sf /usr/local/bin/escript /usr/bin/escript
 
 # Convince the system we installed the erlang package.
 cat <<EOF > erlang
