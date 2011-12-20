@@ -1,4 +1,0 @@
-Either;
-* Reduce erlang build dependency to the minimum requirement
-Or;
-* Build R14B01 from source each time
