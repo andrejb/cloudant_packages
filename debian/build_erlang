@@ -4,7 +4,7 @@ HOME=/tmp/
 export http_proxy="http://localhost:8123"
 erlang_version="otp_src_R14B01"
 
-apt-get -y install gcc g++ wget build-essential autoconf libncurses-dev openjdk-6-jdk libssl-dev
+apt-get -y install gcc g++ wget build-essential autoconf libncurses-dev openjdk-6-jdk libssl-dev equivs
 echo -n "Fetching erlang tarball: "
 wget --quiet -c http://erlang.org/download/$erlang_version.tar.gz
 echo "done"
@@ -24,6 +24,22 @@ cd ..
 ln -s /usr/local/bin/erl /usr/bin/erl
 ln -s /usr/local/bin/erlc /usr/bin/erlc
 ln -s /usr/local/bin/escript /usr/bin/escript
+
+# Convince the system we installed the erlang package.
+cat <<EOF > erlang
+Section: misc
+Priority: optional
+Standards-Version: 3.6.2
+
+Package: erlang
+Version: 1:14.b.1
+Maintainer: Robert Newson <robert.newson@cloudant.com>
+Architecture: all
+Description: Dummy package to satisfy BigCouch's erlang build dependency
+EOF
+
+equivs-build erlang
+dpkg -i erlang_14.b.1_all.deb
 
 # Cleanup
 rm -f $erlang_version.tar.gz

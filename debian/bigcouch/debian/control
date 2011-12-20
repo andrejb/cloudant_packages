@@ -2,7 +2,7 @@ Source: bigcouch
 Section: misc
 Priority: extra
 Maintainer: Cloudant Support <support@cloudant.com>
-Build-Depends: debhelper (>= 7.0.15~), quilt, autotools-dev, libmozjs185-dev (= 1.8.5-1.0.0~cloudant1), libicu-dev, git (>= 1:1.5~) | git-core (>= 1:1.5~), python, libcurl-dev
+Build-Depends: debhelper (>= 7.0.15~), quilt, autotools-dev, libmozjs185-dev (= 1.8.5-1.0.0~cloudant1), libicu-dev, git (>= 1:1.5~) | git-core (>= 1:1.5~), python, libcurl-dev, erlang (>= 1:13.b.3~)
 Standards-Version: 3.8.4
 Homepage: http://cloudant.com/
 Vcs-Git: git://github.com/cloudant/bigcouch.git
