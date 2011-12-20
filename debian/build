@@ -73,7 +73,15 @@ do
 	fi
 
 	# Build erlang from source if missing
-	$SETARCH pbuilder-dist $SUITE $ARCH execute --save-after-exec build_erlang
+	echo -n "Building erlang for $SUITE ($ARCH): "
+	if test -z "$(find ~/pbuilder -maxdepth 1 -name $SUITE-$ARCH.built_erlang -print -quit)"
+	then
+	    echo "starting"
+	    $SETARCH pbuilder-dist $SUITE $ARCH execute --save-after-exec build_erlang
+	    touch ~/pbuilder/$SUITE-$ARCH.built_erlang
+	else
+	    echo "skip"
+	fi
 
 	# Build binary SpiderMonkey package if missing
 	echo -n "Building SpiderMonkey binary for $SUITE ($ARCH): "
