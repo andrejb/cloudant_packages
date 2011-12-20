@@ -16,11 +16,12 @@ echo -n "Fetching erlang tarball: "
 wget --quiet -c http://erlang.org/download/$erlang_version.tar.gz
 echo "done"
 tar zxf $erlang_version.tar.gz
-cd $erlang_version
 
+cd $erlang_version
 ./configure $erlang_options
 make
 make install
+cd ..
 
 ln -s /usr/local/bin/erl /usr/bin/erl
 ln -s /usr/local/bin/erlc /usr/bin/erlc
