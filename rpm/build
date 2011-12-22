@@ -1,0 +1,129 @@
+#!/bin/bash -e
+
+MIRROR="http://mirrors.kernel.org/centos"
+BIGCOUCH_VERSION="0.4.0pre4"
+ERLANG_VERSION="otp_src_R14B01"
+
+# Install dependencies
+sudo apt-get install -y rpm yum > /dev/null
+
+# Configure web cache
+sudo apt-get -y install polipo > /dev/null
+export http_proxy="http://localhost:8123"
+
+build() {
+    DIR="`pwd`/chroots/centos-$1-$2"
+    if [ "$2" == "i386" ]; then SETARCH="linux32"; else SETARCH="linux64"; fi
+
+    if [ ! -f "$DIR/etc/resolv.conf" ];
+    then
+        mkdir -p $DIR/etc
+        cat <<EOF > $DIR/etc/yum.conf
+[main]
+distroverpkg=centos-release
+proxy=$http_proxy
+[base]
+name=base
+baseurl=$MIRROR/$1/os/$2/
+gpgcheck=0
+[update]
+name=updates
+baseurl=$MIRROR/$1/updates/$2/
+gpgcheck=0
+EOF
+        rpm --rebuilddb --root=$DIR > /dev/null
+        rm -f "$MIRROR/$1/$4/$3"
+        wget "$MIRROR/$1/$4/$3"
+        sudo rpm --install --force --root=$DIR --nodeps $3
+        sudo yum \
+            -c $DIR/etc/yum.conf \
+            --installroot=$DIR install -y \
+            tar rpm-build yum
+        sudo cp /etc/resolv.conf $DIR/etc/
+    fi
+
+    # Setup
+    sudo mkdir -p $DIR$HOME/rpmbuild/SOURCES
+    mkdir -p "${DIR}_result"
+
+    # Build SpiderMonkey package
+    sudo cp js-1.8.5*.src.rpm $DIR$HOME
+
+    sudo chroot $DIR yum install -y \
+        autoconf213 gcc gcc-c++ make nspr-devel \
+        python zip readline-devel ncurses-devel rpmlib \
+        pkgconfig
+
+    $SETARCH sudo chroot $DIR rpmbuild --rebuild $HOME/js-1.8.5*.src.rpm
+    sudo rpm --install --force --root=$DIR --nodeps $DIR$HOME/rpmbuild/RPMS/$2/*.rpm
+
+    # Install erlang
+    sudo yum -c $DIR/etc/yum.conf --installroot=$DIR install -y \
+        java-1.6.0-openjdk libicu-devel openssl-devel libcurl-devel git
+
+    sudo cp $ERLANG_VERSION.tar.gz $DIR$HOME
+    cat <<EOF > build_erlang
+#!/bin/bash -e
+cd ~
+tar zxf $ERLANG_VERSION.tar.gz
+cd $ERLANG_VERSION
+./configure \
+    --enable-kernel-poll \
+    --enable-hipe \
+    --enable-threads \
+    --enable-smp-support
+make
+make install
+EOF
+    chmod +x build_erlang
+    sudo cp build_erlang $DIR$HOME
+    sudo chroot $DIR ~/build_erlang
+
+    # Build BigCouch package
+    sudo cp -f bigcouch.spec $DIR$HOME/
+    sudo cp -f bigcouch.tar.gz $DIR$HOME/rpmbuild/SOURCES/
+    $SETARCH sudo chroot $DIR rpmbuild -ba $HOME/bigcouch.spec \
+        --define "_revision 0.4.0" --define "_release 1"
+
+    # Extract RPM's
+    cp $DIR$HOME/rpmbuild/RPMS/$2/*.rpm "${DIR}_result/"
+}
+
+js_src() {
+    rm -f js-1.8.5*.src.rpm
+    wget -c http://infrastructure.fedoraproject.org/repo/pub/fedora/linux/releases/16/Fedora/source/SRPMS/js-1.8.5-7.fc16.src.rpm
+}
+
+bigcouch_src() {
+    rm -rf bigcouch
+    mkdir -p bigcouch
+    pushd bigcouch
+    wget -cO - https://github.com/cloudant/bigcouch/tarball/bigcouch-$BIGCOUCH_VERSION | tar xzf - --strip=1
+    git init
+    git add `find . -maxdepth 1 -not -name debian`
+    git commit -m "Tarball commit"
+    git tag -m "CouchDB Version" "1.1.1"
+    echo "This is the release tarball for $BIGCOUCH_VERSION" > .build
+    git add .build
+    git commit -m "Tarball commit"
+    git tag -m "BigCouch version" "$BIGCOUCH_VERSION"
+    popd
+    tar czf bigcouch.tar.gz bigcouch
+}
+
+erlang_src() {
+    rm -rf $ERLANG_VERSION.tar.gz
+    wget http://erlang.org/download/$ERLANG_VERSION.tar.gz
+}
+
+js_src
+bigcouch_src
+erlang_src
+
+# Build all the things
+build "6" "x86_64" "centos-release-6-2.el6.centos.7.x86_64.rpm" "6/os/x86_64/Packages"
+build "6" "i386" "centos-release-6-2.el6.centos.7.i386.rpm" "6/os/x86_64/Packages"
+
+build "5" "x86_64" "centos-release-5-7.el5.centos.x86_64.rpm" "5/os/x86_64/CentOS"
+build "5" "i386" "centos-release-5-7.el5.centos.i386.rpm" "5/os/i386/CentOS"
+
