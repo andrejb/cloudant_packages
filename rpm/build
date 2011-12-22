@@ -32,8 +32,8 @@ baseurl=$MIRROR/$1/updates/$2/
 gpgcheck=0
 EOF
         rpm --rebuilddb --root=$DIR > /dev/null
-        rm -f "$MIRROR/$1/$4/$3"
-        wget "$MIRROR/$1/$4/$3"
+        rm -f "$MIRROR/$4/$3"
+        wget "$MIRROR/$4/$3"
         sudo rpm --install --force --root=$DIR --nodeps $3
         sudo yum \
             -c $DIR/etc/yum.conf \
