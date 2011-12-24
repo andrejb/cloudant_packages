@@ -1,0 +1,2 @@
+* Output Debian/Ubuntu artifacts in repo layout
+* Output exclusively to within the tree (not ~/pbuilder)
