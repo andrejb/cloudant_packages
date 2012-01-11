@@ -47,9 +47,8 @@ EOF
 EOF
     sudo mkdir -p "${DIR}_result"
 
-    # Build SpiderMonkey package (disabled for now)
-    #if test -z "$(find ${DIR}_result -maxdepth 1 -name 'js-*.rpm' -print -quit)"
-    if test -z "DON'T BUILD"
+    # Build SpiderMonkey package (only on CentOS 6)
+    if [ "$1" = "6" -a -z "$(find ${DIR}_result -maxdepth 1 -name 'js-*.rpm' -print -quit)" ];
     then
         $SETARCH sudo chroot $DIR yum install -y \
             autoconf213 gcc gcc-c++ make nspr-devel \
