@@ -63,8 +63,8 @@ EOF
         $SETARCH sudo chroot $DIR rpm --install --force --nodeps $HOME/rpmbuild/RPMS/$2/*.rpm
     fi
 
-    # Install js-devel if above build failed (or is disabled)
-    if test -z "$(find ${DIR}_result -maxdepth 1 -name 'js-*.rpm' -print -quit)"
+    # Install js-devel (only on CentOS 5)
+    if [ "$1" = "5" -a -z "$(find ${DIR}_result -maxdepth 1 -name 'js-*.rpm' -print -quit)" ];
     then
         EPEL_PATH="http://download.fedoraproject.org/pub/epel/$1/i386"
         if [ "$1" == "5" ];
