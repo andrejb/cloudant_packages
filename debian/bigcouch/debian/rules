@@ -14,3 +14,6 @@
 
 override_dh_auto_configure:
 	./configure -p /opt/bigcouch
+
+override_dh_auto_test:
+	echo "skipping tests"
