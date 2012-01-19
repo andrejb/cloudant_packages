@@ -53,7 +53,7 @@ do
     for ARCH in $ARCHS
     do
         mk-sbuild --arch $ARCH $DIST || true
-        sbuild -arch $ARCH --dist $DIST js*.dsc
-        sbuild -arch $ARCH --dist $DIST bigcouch*.dsc
+        sbuild --arch $ARCH --dist $DIST js*.dsc
+        sbuild --arch $ARCH --dist $DIST bigcouch*.dsc
     done
 done
