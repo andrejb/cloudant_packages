@@ -1,0 +1,59 @@
+#!/bin/bash
+DISTS="lenny squeeze lucid maverick natty oneiric"
+ARCHS="i386 amd64"
+
+sudo apt-get -y install ubuntu-dev-tools dh-make
+
+# Build SpiderMonkey source package if missing
+echo -n "Building SpiderMonkey source package: "
+if test -z "$(find . -maxdepth 1 -name 'js_*.dsc' -print -quit)"
+then
+    echo "starting"
+    rm -rf js-1.8.5
+    wget -cO js_1.8.5.orig.tar.gz http://ftp.mozilla.org/pub/mozilla.org/js/js185-1.0.0.tar.gz
+    tar zxf js_1.8.5.orig.tar.gz
+    cp -a js/debian js-1.8.5
+    pushd js-1.8.5
+    dpkg-buildpackage -S -uc -us
+    popd
+else
+    echo "skip"
+fi
+
+# Build BigCouch source package if missing
+echo -n "Building BigCouch source package: "
+if test -z "$(find . -maxdepth 1 -name 'bigcouch_*.dsc' -print -quit)"
+then
+    echo "starting"
+    rm -rf bigcouch-0.4.0
+    mkdir -p bigcouch-0.4.0
+    cp -a bigcouch/debian bigcouch-0.4.0
+    pushd bigcouch-0.4.0
+    wget -cO - https://github.com/cloudant/bigcouch/tarball/bigcouch-0.4.0pre6 | tar xzf - --strip=1
+    git init
+    git add `find . -maxdepth 1 -not -name debian`
+    git commit -m "Tarball commit"
+    git tag -m "CouchDB Version" "1.1.1"
+    echo "This is the release tarball for 0.4.0" > .build
+    git add .build
+    git commit -m "Tarball commit"
+    git tag -m "BigCouch version" "0.4.0"
+    popd
+    tar czf bigcouch_0.4.0.orig.tar.gz -C bigcouch-0.4.0 . --exclude=debian --transform 's,^./,bigcouch-0.4.0/,'
+    pushd bigcouch-0.4.0
+    dpkg-buildpackage -S -uc -us
+    popd
+else
+    echo "skip"
+fi
+
+# Build binary packages
+for DIST in $DISTS
+do
+    for ARCH in $ARCHS
+    do
+        mk-sbuild --arch $ARCH $DIST || true
+        sbuild -arch $ARCH --dist $DIST js*.dsc
+        sbuild -arch $ARCH --dist $DIST bigcouch*.dsc
+    done
+done
