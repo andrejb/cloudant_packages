@@ -124,6 +124,10 @@ EOF
     # Remove bind mounts
     sudo umount $DIR/proc
     sudo umount $DIR/dev
+
+    # Clean up
+    sudo rm -rf $DIR
+
     trap - EXIT
 }
 
