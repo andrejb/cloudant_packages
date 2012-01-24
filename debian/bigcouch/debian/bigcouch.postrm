@@ -9,6 +9,10 @@ case $1 in
             rm -r -f "/opt/bigcouch"
         fi
         if getent passwd bigcouch > /dev/null && which deluser > /dev/null; then
+            for PID in `ps --no-headers -u bigcouch -opid`
+            do
+                kill $PID
+            done
             deluser bigcouch
 	fi
         if getent group bigcouch > /dev/null && which delgroup > /dev/null; then
