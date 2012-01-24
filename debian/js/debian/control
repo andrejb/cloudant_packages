@@ -6,7 +6,7 @@ Standards-Version: 3.9.1
 Section: libs
 Homepage: http://www.mozilla.org/js
 
-Package: libmozjs185-1.0
+Package: libmozjs185-cloudant
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -15,10 +15,10 @@ Description: Spidermonkey javascript engine
  JavaScript. It is intended to be embedded in other applications
  that provide host environments for JavaScript.
 
-Package: libmozjs185-dev
+Package: libmozjs185-cloudant-dev
 Section: libdevel
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libmozjs185-1.0 (= ${binary:Version}), libnspr4-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmozjs185-cloudant (= ${binary:Version}), libnspr4-dev
 Description: Spidermonkey javascript library - development headers
  SpiderMonkey is the code-name for the Mozilla's C implementation of
  JavaScript. It is intended to be embedded in other applications
