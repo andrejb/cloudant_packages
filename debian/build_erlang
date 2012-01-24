@@ -41,6 +41,9 @@ EOF
 equivs-build erlang
 dpkg -i erlang_14.b.1_all.deb
 
+# Prevent upgrade
+echo erlang hold | dpkg --set-selections
+
 # Cleanup
 rm -f $erlang_version.tar.gz
 rm -rf $erlang_version
