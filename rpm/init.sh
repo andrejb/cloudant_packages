@@ -31,7 +31,11 @@ fi
 
 start() {
     echo -n $"Starting $prog: "
+
     export HOME=/home/${prog}
+    mkdir -p /tmp/{$prog}
+    chown ${prog}:${prog} /tmp/${prog}
+
     RUN_ERL=`find /opt/${prog} -name 'run_erl'`
     daemon \
         --pidfile=${pidfile} \
