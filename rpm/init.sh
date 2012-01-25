@@ -28,6 +28,14 @@ fi
 
 [ -f /opt/bigcouch/bin/bigcouch ] || exit 0
 
+# Detect core count
+CORES=`grep -E "^processor" /proc/cpuinfo |wc -l`
+if [ "$CORE" -eq "1" ]; then
+    BEAM=beam
+else
+    BEAM=beam.smp
+fi
+
 start() {
     echo -n $"Starting $prog: "
 
@@ -44,7 +52,7 @@ start() {
 
 stop() {
     echo -n $"Stopping $prog: "
-    killproc beam
+    killproc $BEAM
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && rm -f ${lockfile} ${pidfile}
@@ -63,11 +71,15 @@ case "$1" in
     stop)
         stop
         ;;
+    status)
+        status -l ${lockfile} $BEAM
+        RETVAL=$?
+        ;;
     restart|reload)
         restart
         ;;
     *)
-        echo $"Usage: $0 (start|stop|restart)"
+        echo $"Usage: $0 (start|stop|restart|status)"
         exit 1
 esac
 
