@@ -3,7 +3,6 @@
 ARCHS="x86_64 i386"
 BIGCOUCH_TAG="0.4.0pre7"
 BIGCOUCH_VERSION="0.4.0"
-DISTS="centos-6 centos-5"
 ERLANG_VERSION="otp_src_R14B01"
 MIRROR="http://mirrors.kernel.org/centos"
 
