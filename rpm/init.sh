@@ -30,7 +30,7 @@ fi
 
 # Detect core count
 CORES=`grep -E "^processor" /proc/cpuinfo |wc -l`
-if [ "$CORE" -eq "1" ]; then
+if [ "$CORES" = "1" ]; then
     BEAM=beam
 else
     BEAM=beam.smp
