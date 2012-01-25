@@ -38,7 +38,7 @@ make dist
 mkdir -p %{buildroot}/opt
 cp -r $RPM_BUILD_DIR/%{name}/rel/%{name} %{buildroot}/opt/
 mkdir -p %{buildroot}/etc/init.d
-cat << 'EOF' > %{buildroot}/etc/init.d/${prog}
+cat <<'EOF' > %{buildroot}/etc/init.d/%{name}
 #!/bin/bash
 #
 # BigCouch
