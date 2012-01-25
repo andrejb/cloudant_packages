@@ -5,6 +5,7 @@
 # chkconfig: 345 13 87
 # description: BigCouch is a dynamo-style distributed database based on Apache CouchDB.
 # processname: bigcouch
+# pidfile: /var/run/bigcouch.pid
 #
 
 # Source function library.
@@ -15,6 +16,7 @@ if [ -f /etc/sysconfig/bigcouch ]; then
 fi
 
 prog="bigcouch"
+lockfile=${LOCKFILE-/var/lock/subsys/bigcouch}
 user=${USER-bigcouch}
 RETVAL=0
 STOP_TIMEOUT=${STOP_TIMEOUT-10}
@@ -33,26 +35,19 @@ start() {
     mkdir -p /tmp/${prog}
     chown ${prog}:${prog} /tmp/${prog}
 
-    RUN_ERL=`find /opt/${prog} -name 'run_erl'`
-    daemon \
-        --user=${user} \
-        $RUN_ERL -daemon \
-        /tmp/${prog}/ \
-        /opt/${prog}/var/log \
-        "/opt/${prog}/bin/${prog}"
+    daemon --user=${user} "/opt/${prog}/bin/${prog} &"
     RETVAL=$?
     echo
+    [ $RETVAL -eq 0 ] && touch ${lockfile}
     return $RETVAL
 }
 
 stop() {
     echo -n $"Stopping $prog: "
-    for PID in `ps --no-headers -u ${prog} -opid`
-    do
-        kill $PID
-    done
+    killproc beam
     RETVAL=$?
-    echo "OK"
+    echo
+    [ $RETVAL -eq 0 ] && rm -f ${lockfile} ${pidfile}
     return $RETVAL
 }
 
