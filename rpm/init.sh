@@ -33,7 +33,7 @@ start() {
     echo -n $"Starting $prog: "
 
     export HOME=/home/${prog}
-    mkdir -p /tmp/{$prog}
+    mkdir -p /tmp/${prog}
     chown ${prog}:${prog} /tmp/${prog}
 
     RUN_ERL=`find /opt/${prog} -name 'run_erl'`
@@ -43,7 +43,7 @@ start() {
         $RUN_ERL -daemon \
         /tmp/${prog}/ \
         /opt/${prog}/var/log \
-        "exec /opt/${prog}/bin/${prog}"
+        "/opt/${prog}/bin/${prog}"
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch ${lockfile}
