@@ -32,14 +32,14 @@ fi
 start() {
     echo -n $"Starting $prog: "
     export HOME=/home/${prog}
-    RUN_ERL=`find /opt/{$prog} -name 'run_erl'`
+    RUN_ERL=`find /opt/${prog} -name 'run_erl'`
     daemon \
         --pidfile=${pidfile} \
         --user=${user} \
         $RUN_ERL -daemon \
-        /tmp/${prog} \
+        /tmp/${prog}/ \
         /opt/${prog}/var/log \
-        /opt/${prog}/bin/${prog}
+        "exec /opt/${prog}/bin/${prog}"
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch ${lockfile}
