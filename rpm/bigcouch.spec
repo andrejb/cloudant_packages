@@ -37,11 +37,13 @@ make dist
 %install
 mkdir -p %{buildroot}/opt
 cp -r $RPM_BUILD_DIR/%{name}/rel/%{name} %{buildroot}/opt/
+cp -a init.sh %{buildroot}/etc/init.d/%{name}
 
 %files
 %defattr(-, %{name}, %{name})
 %doc README.md LICENSE
 /opt/%{name}
+/etc/init.d/%{name}
 
 %pre
 # create group only if it doesn't already exist
@@ -55,8 +57,18 @@ if ! getent passwd %{name} >/dev/null 2>&1; then
         -g %{name} \
         -m -d /home/%{name} \
         --shell /bin/bash \
-        %{name} 
+        %{name}
 fi
+
+%post
+/sbin/chkconfig --add %{name}
+service %{name} start
+
+%preun
+service %{name} stop
+
+%postun
+/sbin/chkconfig --del %{name}
 
 %clean
 rm -rf %{buildroot}
