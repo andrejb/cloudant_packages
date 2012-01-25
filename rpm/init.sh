@@ -35,7 +35,7 @@ start() {
     mkdir -p /tmp/${prog}
     chown ${prog}:${prog} /tmp/${prog}
 
-    daemon --user=${user} "/opt/${prog}/bin/${prog} &"
+    daemon --user=${user} "/opt/${prog}/bin/${prog} >/dev/null &"
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch ${lockfile}
