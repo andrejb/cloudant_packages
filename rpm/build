@@ -23,6 +23,7 @@ build() {
 [main]
 distroverpkg=centos-release
 gpgcheck=0
+multilib_policy=best
 EOF
         $SETARCH rpm --rebuilddb --root=$DIR
         wget -c "$MIRROR/$4/$3"
