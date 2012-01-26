@@ -126,6 +126,7 @@ esac
 
 exit $?
 EOF
+chmod +x %{buildroot}/etc/init.d/%{name}
 
 %files
 %defattr(-, %{name}, %{name})
