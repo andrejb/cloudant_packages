@@ -154,7 +154,7 @@ fi
 service %{name} start
 
 %preun
-service %{name} stop
+service %{name} stop || true
 
 %postun
 /sbin/chkconfig --del %{name}
