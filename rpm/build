@@ -143,7 +143,7 @@ bigcouch_src() {
     rm -rf bigcouch
     mkdir -p bigcouch
     pushd bigcouch
-    wget -O - https://github.com/cloudant/bigcouch/tarball/bigcouch-$BIGCOUCH_TAG | tar xzf - --strip=1
+    tar zxf ~/bigcouchplus.tar.gz
     git init
     git add `find . -maxdepth 1 -not -name debian`
     git commit -m "Tarball commit"
