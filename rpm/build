@@ -12,7 +12,12 @@ sudo apt-get install -y rpm yum
 build() {
     DIR=~/rpm/centos-$1-$2
     mkdir -p $DIR
-
+    sudo mkdir -p $DIR/root/.ssh
+    sudo cp ~/.ssh/id* $DIR/root/.ssh
+cat <<EOF | sudo tee $DIR/root/.ssh/config
+UserKnownHostsFile=/dev/null
+StrictHostKeyChecking=no 
+EOF
     if [ "$2" == "i386" ]; then SETARCH="linux32"; else SETARCH="linux64"; fi
 
     if [ ! -f "$DIR/.finished" ];
