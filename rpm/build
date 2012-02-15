@@ -62,6 +62,7 @@ EOF
         sudo cp js*.patch js*.tar.gz $DIR$HOME/rpmbuild/SOURCES
         $SETARCH sudo chroot $DIR rpmbuild -ba $HOME/js.spec
         $SETARCH sudo chroot $DIR rpm --install --force --nodeps $HOME/rpmbuild/RPMS/$2/*.rpm
+        sudo cp $DIR$HOME/rpmbuild/RPMS/$2/*.rpm ~/rpm/centos-$1-$2_result/
     fi
 
     # Install js-devel (only on CentOS 5)
