@@ -12,6 +12,8 @@ Summary: BigCouch is a dynamo-style distributed database based on Apache CouchDB
 
 Source: %{name}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+Prefix: /opt
+Prefix: /etc
 
 %description
 BigCouch is a dynamo-style distributed database based on Apache CouchDB.
