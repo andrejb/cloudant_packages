@@ -141,17 +141,10 @@ js_src() {
 
 bigcouch_src() {
     rm -rf bigcouch
-    mkdir -p bigcouch
+    git clone git://github.com/cloudant/bigcouch.git
     pushd bigcouch
-    wget -O - https://github.com/cloudant/bigcouch/tarball/bigcouch-$BIGCOUCH_TAG | tar xzf - --strip=1
-    git init
-    git add `find . -maxdepth 1 -not -name debian`
-    git commit -m "Tarball commit"
-    git tag -m "CouchDB Version" "1.1.1"
-    echo "This is the release tarball for $BIGCOUCH_VERSION" > .build
-    git add .build
-    git commit -m "Tarball commit"
-    git tag -m "BigCouch version" "$BIGCOUCH_VERSION"
+    git remote add couchdb http://git-wip-us.apache.org/repos/asf/couchdb.git
+    git checkout $BIGCOUCH_TAG
     popd
     tar czf bigcouch.tar.gz bigcouch
 }
