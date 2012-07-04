@@ -154,10 +154,17 @@ fi
 service %{name} start
 
 %preun
-service %{name} stop || true
+if [ $1 = 0 ]; then // package is being erased, not upgraded
+    /sbin/service %{name} stop > /dev/null 2>&1
+    /sbin/chkconfig --del %{name}
+fi
 
 %postun
-/sbin/chkconfig --del %{name}
+if [ $1 = 0 ]; then // package is being erased
+    # uninstall steps?
+else
+    /sbin/service %{name} condrestart > /dev/null 2>&1
+fi
 
 %clean
 rm -rf %{buildroot}
