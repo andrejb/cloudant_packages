@@ -154,14 +154,14 @@ fi
 service %{name} start
 
 %preun
-if [ $1 = 0 ]; then // package is being erased, not upgraded
+if [ $1 = 0 ]; then
     /sbin/service %{name} stop > /dev/null 2>&1
     /sbin/chkconfig --del %{name}
 fi
 
 %postun
-if [ $1 = 0 ]; then // package is being erased
-    # uninstall steps?
+if [ $1 = 0 ]; then
+    sleep 0
 else
     /sbin/service %{name} condrestart > /dev/null 2>&1
 fi
