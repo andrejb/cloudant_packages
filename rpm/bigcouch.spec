@@ -58,7 +58,7 @@ fi
 
 prog="bigcouch"
 lockfile=${LOCKFILE-/var/lock/subsys/bigcouch}
-user=${USER-bigcouch}
+user="bigcouch"
 RETVAL=0
 STOP_TIMEOUT=${STOP_TIMEOUT-10}
 
