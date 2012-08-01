@@ -58,7 +58,7 @@ fi
 
 prog="bigcouch"
 lockfile=${LOCKFILE-/var/lock/subsys/bigcouch}
-user="bigcouch"
+user="${prog}"
 RETVAL=0
 STOP_TIMEOUT=${STOP_TIMEOUT-10}
 
@@ -78,13 +78,14 @@ else
 fi
 
 start() {
-    echo -n $"Starting $prog: "
+    echo -n $"Starting ${prog}: "
 
     export HOME=/home/${prog}
-    mkdir -p /tmp/${prog}
-    chown ${prog}:${prog} /tmp/${prog}
+    cd $HOME
+    mkdir -p /var/log/${prog}
+    chown ${prog}:${prog} /var/log/${prog}
 
-    daemon --user=${user} "/opt/${prog}/bin/${prog} >/dev/null &"
+    daemon --user=${user} "/opt/${prog}/bin/${prog} >/var/log/${prog}/${prog}.log &"
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch ${lockfile}
