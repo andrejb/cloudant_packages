@@ -82,10 +82,7 @@ start() {
 
     export HOME=/home/${prog}
     cd $HOME
-    mkdir -p /var/log/${prog}
-    chown ${prog}:${prog} /var/log/${prog}
-
-    daemon --user=${user} "/opt/${prog}/bin/${prog} >/var/log/${prog}/${prog}.log &"
+    daemon --user=${user} "/opt/${prog}/bin/${prog} >/dev/null &"
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch ${lockfile}
