@@ -170,8 +170,8 @@ bigcouch_src
 erlang_src
 
 # Build all the things
-build "6" "x86_64" "centos-release-6-2.el6.centos.9.x86_64.rpm" "6/os/x86_64/Packages"
-build "6" "i386" "centos-release-6-2.el6.centos.9.i686.rpm" "6/os/i386/Packages"
+build "6" "x86_64" "centos-release-6-3.el6.centos.9.x86_64.rpm" "6/os/x86_64/Packages"
+build "6" "i386" "centos-release-6-3.el6.centos.9.i686.rpm" "6/os/i386/Packages"
 
 build "5" "x86_64" "centos-release-5-8.el5.centos.x86_64.rpm" "5/os/x86_64/CentOS"
 build "5" "i386" "centos-release-5-8.el5.centos.i386.rpm" "5/os/i386/CentOS"
