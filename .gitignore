@@ -2,3 +2,5 @@
 *.deb
 *.dsc
 *.gz
+/.project
+/.pydevproject
