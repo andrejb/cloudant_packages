@@ -37,7 +37,7 @@ then
     mkdir -p bigcouch-0.4.0
     cp -a bigcouch/debian bigcouch-0.4.0
     pushd bigcouch-0.4.0
-    wget -cO - https://github.com/cloudant/bigcouch/tarball/bigcouch-0.4.0 | tar xzf - --strip=1
+    wget -cO - https://api.github.com/repos/cloudant/bigcouch/tarball/050b8c9e | tar zxf - --strip=1
     git init
     git add `find . -maxdepth 1 -not -name debian`
     git commit -m "Tarball commit"
