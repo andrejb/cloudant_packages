@@ -10,6 +10,7 @@ Package: libmozjs185-cloudant
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libmozjs185-1.0
 Description: Spidermonkey javascript engine
  SpiderMonkey is the code-name for the Mozilla's C implementation of
  JavaScript. It is intended to be embedded in other applications
@@ -19,6 +20,7 @@ Package: libmozjs185-cloudant-dev
 Section: libdevel
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libmozjs185-cloudant (= ${binary:Version}), libnspr4-dev
+Conflicts: libmozjs185-dev
 Description: Spidermonkey javascript library - development headers
  SpiderMonkey is the code-name for the Mozilla's C implementation of
  JavaScript. It is intended to be embedded in other applications
