@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 ARCHS="x86_64 i386"
-BIGCOUCH_TAG="bigcouch-0.4.0"
-BIGCOUCH_VERSION="0.4.0"
+BIGCOUCH_TAG="bigcouch-0.4.2"
+BIGCOUCH_VERSION="0.4.2"
 ERLANG_VERSION="otp_src_R14B01"
 MIRROR="http://mirrors.kernel.org/centos"
 
