@@ -37,7 +37,7 @@ then
     rm -rf bigcouch-${VSN}
     mkdir -p bigcouch-${VSN}
     cp -a bigcouch/debian bigcouch-${VSN}
-    pushd bigcouch-{$VSN}
+    pushd bigcouch-${VSN}
     wget -cO - https://github.com/cloudant/bigcouch/archive/bigcouch-${VSN}.tar.gz | tar zxf - --strip=1
     git init
     git add `find . -maxdepth 1 -not -name debian`
