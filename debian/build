@@ -28,27 +28,28 @@ else
     echo "skip"
 fi
 
+VSN="0.4.2"
 # Build BigCouch source package if missing
 echo -n "Building BigCouch source package: "
 if test -z "$(find . -maxdepth 1 -name 'bigcouch_*.dsc' -print -quit)"
 then
     echo "starting"
-    rm -rf bigcouch-0.4.0
-    mkdir -p bigcouch-0.4.0
-    cp -a bigcouch/debian bigcouch-0.4.0
-    pushd bigcouch-0.4.0
-    wget -cO - https://api.github.com/repos/cloudant/bigcouch/tarball/050b8c9e | tar zxf - --strip=1
+    rm -rf bigcouch-${VSN}
+    mkdir -p bigcouch-${VSN}
+    cp -a bigcouch/debian bigcouch-${VSN}
+    pushd bigcouch-{$VSN}
+    wget -cO - https://github.com/cloudant/bigcouch/archive/bigcouch-${VSN}.tar.gz | tar zxf - --strip=1
     git init
     git add `find . -maxdepth 1 -not -name debian`
     git commit -m "Tarball commit"
     git tag -m "CouchDB Version" "1.1.1"
-    echo "This is the release tarball for 0.4.0" > .build
+    echo "This is the release tarball for ${VSN}" > .build
     git add .build
     git commit -m "Tarball commit"
-    git tag -m "BigCouch version" "0.4.0"
+    git tag -m "BigCouch version" "${VSN}"
     popd
-    tar czf bigcouch_0.4.0.orig.tar.gz -C bigcouch-0.4.0 . --exclude=debian --transform 's,^./,bigcouch-0.4.0/,'
-    pushd bigcouch-0.4.0
+    tar czf bigcouch_${VSN}.orig.tar.gz -C bigcouch-${VSN} . --exclude=debian --transform "s,^./,bigcouch-${VSN}/,"
+    pushd bigcouch-${VSN}
     dpkg-buildpackage -S -uc -us
     popd
 else

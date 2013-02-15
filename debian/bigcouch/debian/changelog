@@ -1,3 +1,9 @@
+bigcouch (0.4.2-1) unstable; urgency=low
+
+  * Updated build for 0.4.2
+
+ -- Robert Newson <robert.newson@cloudant.com>  Fri, 15 Feb 2013 18:02:32 +0000
+
 bigcouch (0.4.0-1) unstable; urgency=low
 
   * Updated build for 0.4.0
