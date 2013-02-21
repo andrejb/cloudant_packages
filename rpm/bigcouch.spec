@@ -161,7 +161,7 @@ fi
 if [ $1 = 0 ]; then
     sleep 0
 else
-    /sbin/service %{name} condrestart > /dev/null 2>&1
+    /sbin/service %{name} restart > /dev/null 2>&1
 fi
 
 %clean
