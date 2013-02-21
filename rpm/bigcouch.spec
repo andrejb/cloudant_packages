@@ -117,6 +117,9 @@ case "$1" in
     restart|reload)
         restart
         ;;
+    condrestart)
+        [ ! -e ${lockfile} ] && restart
+        ;;
     *)
         echo $"Usage: $0 (start|stop|restart|status)"
         exit 1
@@ -158,10 +161,8 @@ if [ $1 = 0 ]; then
 fi
 
 %postun
-if [ $1 = 0 ]; then
-    sleep 0
-else
-    /sbin/service %{name} restart > /dev/null 2>&1
+if [ "$1" -ge "1" ] ; then
+    /sbin/service %{name} condrestart >/dev/null 2>&1 || :
 fi
 
 %clean
