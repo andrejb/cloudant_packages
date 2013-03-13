@@ -29,6 +29,7 @@ else
 fi
 
 VSN="0.4.2"
+GH="0.4.2b"
 # Build BigCouch source package if missing
 echo -n "Building BigCouch source package: "
 if test -z "$(find . -maxdepth 1 -name 'bigcouch_*.dsc' -print -quit)"
@@ -38,7 +39,7 @@ then
     mkdir -p bigcouch-${VSN}
     cp -a bigcouch/debian bigcouch-${VSN}
     pushd bigcouch-${VSN}
-    wget -cO - https://github.com/cloudant/bigcouch/archive/bigcouch-${VSN}.tar.gz | tar zxf - --strip=1
+    wget -cO - https://github.com/cloudant/bigcouch/archive/bigcouch-${GH}.tar.gz | tar zxf - --strip=1
     git init
     git add `find . -maxdepth 1 -not -name debian`
     git commit -m "Tarball commit"
